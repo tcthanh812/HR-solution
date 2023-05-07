@@ -28,3 +28,4 @@ A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9
 2. Import the raw data table. Import the excel file to the HR_db. Two tables are created: dbo.Attendance$ and dbo.Employee$ 
 3. 
 
+
