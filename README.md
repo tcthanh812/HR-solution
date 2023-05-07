@@ -7,7 +7,6 @@ The HR department manages the employees using a spreadsheet. In the spreadsheet:
 - [Attendance](https://docs.google.com/spreadsheets/d/1DJYTOcLgxjPA6KuPBIxC4kz67pX6i5E1KOzKzdORkYk/edit#gid=1114897994) stores all the attendance information of the employees. 
 
 ## 2. Data modelling
-### A. Conceptual level
 Let's define the entities and attributes based on the data in tab Working. In the tab Working, there is no column for Department. However, after the discussion with the HR team, the hospital has departments and corresponding manager for each. Therefore, adding a department entity is my recommendation. From that, the HR team can easily gain a summary for each department performance.  
 
 ### Entities: 
@@ -21,5 +20,5 @@ Let's define the entities and attributes based on the data in tab Working. In th
 - Insurance
 - Attendance 
 
-A graph was created to show [the conceptual level design](https://dbdiagram.io/d/64574475dca9fb07c4a301cd)
+A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9fb07c4a301cd)
 
