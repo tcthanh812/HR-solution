@@ -6,8 +6,7 @@ The HR department manages the employees using a spreadsheet. In the spreadsheet:
 - [Employees](https://docs.google.com/spreadsheets/d/1DJYTOcLgxjPA6KuPBIxC4kz67pX6i5E1KOzKzdORkYk/edit#gid=716097444) stores all the information about the employees. 
 - [Attendance](https://docs.google.com/spreadsheets/d/1DJYTOcLgxjPA6KuPBIxC4kz67pX6i5E1KOzKzdORkYk/edit#gid=1114897994) stores all the attendance information of the employees. 
 
-## 2. Data modelling
-Let's define the entities and attributes based on the data in tab Working. In the tab Working, there is no column for Department. However, after the discussion with the HR team, the hospital has departments and corresponding manager for each. Therefore, adding a department entity is my recommendation. From that, the HR team can easily gain a summary for each department performance.  
+## 2. Database schema
 
 ### Entities: 
 - Department
