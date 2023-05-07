@@ -22,3 +22,5 @@ Let's define the entities and attributes based on the data in tab Working. In th
 
 A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9fb07c4a301cd)
 
+
+
