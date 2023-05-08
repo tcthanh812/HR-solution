@@ -21,7 +21,7 @@ The HR department manages the employees using a spreadsheet. In the spreadsheet:
 A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9fb07c4a301cd)
 
 
-![Data Model](Database_Schema.jpeg)
+![Data Model](db_schema.jpeg)
 
 ## 3. Create the database in Microsoft SQL Server from the raw Excel file. 
 1. Create a new database in Microsoft SQL Server Management Studio (SSMS): ```HR_db```.
@@ -32,7 +32,8 @@ A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9
    -- Create the Department table
    CREATE TABLE Department (
       id varchar(20) PRIMARY KEY, 
-      name varchar(50)
+      name varchar(50),
+      manager_id varchar(20)
    )
    GO
    
@@ -60,6 +61,10 @@ A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9
       bank_account int
    )    
    GO
+ 
+   -- Constrain
+   ALTER TABLE [Employee] ADD CONSTRAINT [has] FOREIGN KEY ([department_id]) REFERENCES [Department] ([id])
+   GO
    
    --Insert data into table
    INSERT INTO [dbo].[Employee] ([id], [name], [department_id], [office_id], [title], [date_of_birth], [manager_id], [bank_account])
@@ -83,7 +88,9 @@ A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9
       NULL, 
       Bank_account
    FROM dbo.Employee$
-   
 ```
 ## 4. ETL & Schedule (From the Attendance file)
-The Attendance file is exported from the Punch Clock. The HR department wants to store the attendance data file and uses it to calculate the salary for each month and review the performance. A schedule would be created to trigger an ETL proccess: importing data from the Attendance file to the Attendance table on database, also calculate the qualified work day for all the employees. 
+The Attendance file is exported from the Punch Clock. The HR department wants to store the attendance data file and uses it to calculate the salary for each month and review the performance. A schedule would be created to trigger an ETL proccess: importing data from the Attendance file to the Attendance table on database, also calculate the qualified work day for all the employees. Create a view to calculate the total work hours and total valid work days. Valid work day must qualified the following criteria:
+- Check in not after 08:00 AM. 
+- Check out not before 05:00 PM. 
+
