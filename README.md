@@ -38,10 +38,12 @@ A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9
    
    --Insert data into Department table
    INSERT INTO [dbo].[Department] ([id],[name],[manager_id]) 
-   VALUES ("DOC","Doctor",NULL),
-          ("NUR","Nurse",NULL),
-          ("MAR","Marketing", NULL),
-          ("HR","HR", NULL),
+   VALUES ("SUR","Surgeon",NULL),
+          ("ANE","Anesthesiology",NULL),
+          ("NUR","Nursing",NULL),
+          ("SEC","Security",NULL
+          ("MAR","Marketing",NULL),
+          ("HR","HR",NULL),
           ("IT","IT",NULL),
    GO
    
