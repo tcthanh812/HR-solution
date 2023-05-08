@@ -30,6 +30,13 @@ A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9
 ```sql
    CREATE TABLE Employee (
       id varchar(20) PRIMARY KEY,
-      
+      name varchar(50),
+      department_id varchar(20),
+      office_id varchar(20), 
+      title varchar(20),
+      date_of_birth date,
+      manager_id varchar(20),
+      bank_account int
+   )    
 ```
 
