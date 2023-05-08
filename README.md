@@ -28,7 +28,8 @@ A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9
 2. Import the raw data table. Import the excel file to the HR_db. Two tables are created: ```dbo.Attendance$``` and ```dbo.Employee$``` 
 3. Create the new tables. Using the database schema in section 2. 
 ```sql
-   CREATE *
-   FROM everything
+   CREATE TABLE Employee (
+      id varchar(20) PRIMARY KEY,
+      
 ```
 
