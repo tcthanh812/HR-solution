@@ -23,11 +23,25 @@ A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9
 
 ![Data Model](DataModel.jpeg)
 
-## 3. Create the database in Microsoft SQL Server using the raw Excel file. 
+## 3. Create the database in Microsoft SQL Server from the raw Excel file. 
 1. Create a new database in Microsoft SQL Server Management Studio (SSMS): ```HR_db```.
 2. Import the raw data table. Import the excel file to the HR_db. Two tables are created: ```dbo.Attendance$``` and ```dbo.Employee$``` 
-3. Create the new tables. Using the database schema in section 2. 
+3. Using the database schema in section 2, create a script to create tables and insert data from the raw tables.
 ```sql
+   USE [HR_db] 
+   -- Create the Department table
+   CREATE TABLE Department (
+      id varchar(20) PRIMARY KEY, 
+      name varchar(50)
+   )
+   GO
+   
+   --Insert data into Department table
+   INSERT INTO [dbo].[Department] ([id],[name],[manager_id]) 
+   
+   
+   
+   -- Create the Employee table
    CREATE TABLE Employee (
       id varchar(20) PRIMARY KEY,
       name varchar(50),
@@ -38,5 +52,10 @@ A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9
       manager_id varchar(20),
       bank_account int
    )    
+   GO
+   
+   --Insert data into table
+   INSERT INTO [dbo].[Employee] (id, name, department_id, office_id, title, date_of_birth, manager_id, bank_account)
+   
 ```
 
