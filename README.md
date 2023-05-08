@@ -62,7 +62,27 @@ A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9
    GO
    
    --Insert data into table
-   INSERT INTO [dbo].[Employee] (id, name, department_id, office_id, title, date_of_birth, manager_id, bank_account)
+   INSERT INTO [dbo].[Employee] ([id], [name], [department_id], [office_id], [title], [date_of_birth], [manager_id], [bank_account])
+   SELECT 
+      ID,
+      Full_name,
+      CASE Title
+         WHEN 'Surgeon Doctor' THEN 'SUR'
+         WHEN 'Nurse' THEN 'NUR'
+         WHEN 'Anesthesiologist' THEN 'ANE'
+         WHEN 'Security' THEN 'SEC'
+         WHEN 'Marketing' THEN 'MAR'
+         WHEN 'Designer' THEN 'DES'
+         WHEN 'HR' THEN 'HR'
+         WHEN 'IT' THEN 'IT'
+         ELSE NULL
+      END AS department_id,
+      Office,
+      Title,
+      Date_Of_Birth,
+      NULL, 
+      Bank_account
+   FROM dbo.Employee$
    
 ```
 
