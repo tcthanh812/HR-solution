@@ -21,7 +21,7 @@ The HR department manages the employees using a spreadsheet. In the spreadsheet:
 A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9fb07c4a301cd)
 
 
-![Data Model](DataModel.jpeg)
+![Data Model](Database_Schema.jpeg)
 
 ## 3. Create the database in Microsoft SQL Server from the raw Excel file. 
 1. Create a new database in Microsoft SQL Server Management Studio (SSMS): ```HR_db```.
