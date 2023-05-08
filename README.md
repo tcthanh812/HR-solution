@@ -85,4 +85,6 @@ A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9
    FROM dbo.Employee$
    
 ```
+## 4. ETL & Schedule (From the Attendance file)
+
 
