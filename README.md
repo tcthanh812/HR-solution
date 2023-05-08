@@ -86,5 +86,4 @@ A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9
    
 ```
 ## 4. ETL & Schedule (From the Attendance file)
-
-
+The Attendance file is exported from the Punch Clock. The HR department wants to store the attendance data file and uses it to calculate the salary for each month and review the performance. A schedule would be created to trigger an ETL proccess: importing data from the Attendance file to the Attendance table on database, also calculate the qualified work day for all the employees. 
