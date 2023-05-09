@@ -27,68 +27,68 @@ A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9
 1. Create a new database in Microsoft SQL Server Management Studio (SSMS): ```HR_db```.
 2. Import the raw data table. Import the excel file to the HR_db. Two tables are created: ```dbo.Attendance$``` and ```dbo.Employee$``` 
 3. Using the database schema in section 2, create a script to create tables and insert data from the raw tables.
-```sql
-   USE [HR_db] 
-   -- Create the Department table
-   CREATE TABLE Department (
-      id varchar(20) PRIMARY KEY, 
-      name varchar(50),
-      manager_id varchar(20)
-   )
-   GO
-   
-   --Insert data into Department table
-   INSERT INTO [dbo].[Department] ([id],[name],[manager_id]) 
-   VALUES ("SUR","Surgeon",NULL),
-          ("ANE","Anesthesiology",NULL),
-          ("NUR","Nursing",NULL),
-          ("SEC","Security",NULL
-          ("MAR","Marketing",NULL),
-          ("HR","HR",NULL),
-          ("IT","IT",NULL),
-   GO
-   
-   
-   -- Create the Employee table
-   CREATE TABLE Employee (
-      id varchar(20) PRIMARY KEY,
-      name varchar(50),
-      department_id varchar(20),
-      office_id varchar(20), 
-      title varchar(20),
-      date_of_birth date,
-      manager_id varchar(20),
-      bank_account int
-   )    
-   GO
- 
-   -- Constrain
-   ALTER TABLE [Employee] ADD CONSTRAINT [has] FOREIGN KEY ([department_id]) REFERENCES [Department] ([id])
-   GO
-   
-   --Insert data into table
-   INSERT INTO [dbo].[Employee] ([id], [name], [department_id], [office_id], [title], [date_of_birth], [manager_id], [bank_account])
-   SELECT 
-      ID,
-      Full_name,
-      CASE Title
-         WHEN 'Surgeon Doctor' THEN 'SUR'
-         WHEN 'Nurse' THEN 'NUR'
-         WHEN 'Anesthesiologist' THEN 'ANE'
-         WHEN 'Security' THEN 'SEC'
-         WHEN 'Marketing' THEN 'MAR'
-         WHEN 'Designer' THEN 'DES'
-         WHEN 'HR' THEN 'HR'
-         WHEN 'IT' THEN 'IT'
-         ELSE NULL
-      END AS department_id,
-      Office,
-      Title,
-      Date_Of_Birth,
-      NULL, 
-      Bank_account
-   FROM dbo.Employee$
-```
+   ```sql
+      USE [HR_db] 
+      -- Create the Department table
+      CREATE TABLE Department (
+         id varchar(20) PRIMARY KEY, 
+         name varchar(50),
+         manager_id varchar(20)
+      )
+      GO
+
+      --Insert data into Department table
+      INSERT INTO [dbo].[Department] ([id],[name],[manager_id]) 
+      VALUES ("SUR","Surgeon",NULL),
+             ("ANE","Anesthesiology",NULL),
+             ("NUR","Nursing",NULL),
+             ("SEC","Security",NULL
+             ("MAR","Marketing",NULL),
+             ("HR","HR",NULL),
+             ("IT","IT",NULL),
+      GO
+
+
+      -- Create the Employee table
+      CREATE TABLE Employee (
+         id varchar(20) PRIMARY KEY,
+         name varchar(50),
+         department_id varchar(20),
+         office_id varchar(20), 
+         title varchar(20),
+         date_of_birth date,
+         manager_id varchar(20),
+         bank_account int
+      )    
+      GO
+
+      -- Constrain
+      ALTER TABLE [Employee] ADD CONSTRAINT [has] FOREIGN KEY ([department_id]) REFERENCES [Department] ([id])
+      GO
+
+      --Insert data into table
+      INSERT INTO [dbo].[Employee] ([id], [name], [department_id], [office_id], [title], [date_of_birth], [manager_id], [bank_account])
+      SELECT 
+         ID,
+         Full_name,
+         CASE Title
+            WHEN 'Surgeon Doctor' THEN 'SUR'
+            WHEN 'Nurse' THEN 'NUR'
+            WHEN 'Anesthesiologist' THEN 'ANE'
+            WHEN 'Security' THEN 'SEC'
+            WHEN 'Marketing' THEN 'MAR'
+            WHEN 'Designer' THEN 'DES'
+            WHEN 'HR' THEN 'HR'
+            WHEN 'IT' THEN 'IT'
+            ELSE NULL
+         END AS department_id,
+         Office,
+         Title,
+         Date_Of_Birth,
+         NULL, 
+         Bank_account
+      FROM dbo.Employee$
+   ```
 ## 4. ETL & Schedule (From the Attendance file)
 The Attendance file is exported from the Punch Clock. The HR department wants to store the attendance data file and uses it to calculate the salary for each month and review the performance. A schedule would be created to trigger an ETL proccess: importing data from the Attendance file to the Attendance table on database, also calculate the qualified work day for all the employees. Create a view to calculate the total work hours and total valid work days. Valid work day must qualified the following criteria:
 - Check in not after 08:00 AM. 
@@ -103,3 +103,38 @@ The Attendance file is exported from the Punch Clock. The HR department wants to
     A screenshot of the Valid table 
     
    ![Valid Table](Valid_table.jpeg)
+4. Create a Script Task to check if: 
+   - The ```Attendance.txt``` contains the record of the previous month. If not, an email would be sent to the one in charged. 
+   ```C#
+   string filePath = @"C:\Path\To\Your\File.txt"; // Replace with the path to your flat file
+   string[] lines = System.IO.File.ReadAllLines(filePath);
+   DateTime today = DateTime.Today;
+   bool containsCurrentMonth = false;
+   foreach (string line in lines)
+   {
+       string[] fields = line.Split('\t'); // Replace with the delimiter used in your flat file
+       if (fields.Length > 2) // Make sure the line has at least 3 fields (ID, Fingerprinting ID, and Timestamp)
+       {
+           DateTime timestamp;
+           if (DateTime.TryParse(fields[2], out timestamp))
+           {
+               if (timestamp.Year == today.Year && timestamp.Month == today.Month)
+               {
+                   containsCurrentMonth = true;
+                   break;
+               }
+           }
+       }
+   }
+   if (!containsCurrentMonth)
+   {
+       string subject = "Reminder: Update Flat File Source";
+       string body = "The flat file source does not contain any rows with dates from this month. Please update the source file.";
+       Microsoft.SqlServer.Management.Smo.Mail.MailMessage message = new Microsoft.SqlServer.Management.Smo.Mail.MailMessage();
+       message.Subject = subject;
+       message.Body = body;
+       message.To.Add("recipient@example.com"); // Replace with the email address to send the reminder to
+       Microsoft.SqlServer.Management.Smo.Mail.MailServer server = new Microsoft.SqlServer.Management.Smo.Mail.MailServer("mail.example.com");
+       server.SendMail(message);
+   }
+   ```
