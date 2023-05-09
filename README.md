@@ -97,4 +97,5 @@ The Attendance file is exported from the Punch Clock. The HR department wants to
 1. Open the Visual Studio -> Create new project -> Integration Service
 2. Convert the "Attendance.xls" to "Attendance.txt"
 3. Create the Data Flow:
+
 ![Data Flow](Data_flow.jpeg)
