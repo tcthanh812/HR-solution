@@ -1,3 +1,4 @@
+USE [HR_db] 
 CREATE TABLE [Department] (
   [id] nvarchar(255) PRIMARY KEY,
   [name] nvarchar(255),
