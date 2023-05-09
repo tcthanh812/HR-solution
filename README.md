@@ -21,7 +21,7 @@ The HR department manages the employees using a spreadsheet. In the spreadsheet:
 A graph was created to show [the data model](https://dbdiagram.io/d/64574475dca9fb07c4a301cd)
 
 
-![Data Model](db_schema.jpeg)
+   ![Data Model](db_schema.jpeg)
 
 ## 3. Create the database in Microsoft SQL Server from the raw Excel file. 
 1. Create a new database in Microsoft SQL Server Management Studio (SSMS): ```HR_db```.
@@ -98,7 +98,7 @@ The Attendance file is exported from the Punch Clock. The HR department wants to
 2. Convert the "Attendance.xls" to "Attendance.txt"
 3. Create the Data Flow:
 
-![Data Flow](Data_flow.jpeg)
+   ![Data Flow](Data_flow.jpeg)
 
-A screenshot of the Valid table 
-![Valid Table](Valid_table.jpeg)
+    A screenshot of the Valid table 
+   ![Valid Table](Valid_table.jpeg)
