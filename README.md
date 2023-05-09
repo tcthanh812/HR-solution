@@ -94,3 +94,8 @@ The Attendance file is exported from the Punch Clock. The HR department wants to
 - Check in not after 08:00 AM. 
 - Check out not before 05:00 PM. 
 
+1. Open the Visual Studio -> Create new project -> Integration Service
+2. Convert the "Attendance.xls" to "Attendance.txt"
+3. Create the Data Flow:
+   - Import Flat File Source
+
