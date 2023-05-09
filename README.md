@@ -98,4 +98,4 @@ The Attendance file is exported from the Punch Clock. The HR department wants to
 2. Convert the "Attendance.xls" to "Attendance.txt"
 3. Create the Data Flow:
    - Import Flat File Source
-
+   - Data Conversion - Converse the Timestamp column from String to database timestamp. 
