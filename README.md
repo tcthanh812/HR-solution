@@ -101,4 +101,5 @@ The Attendance file is exported from the Punch Clock. The HR department wants to
    ![Data Flow](Data_flow.jpeg)
 
     A screenshot of the Valid table 
+    
    ![Valid Table](Valid_table.jpeg)
