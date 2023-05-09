@@ -106,19 +106,26 @@ The Attendance file is exported from the Punch Clock. The HR department wants to
 4. Create a Script Task to check if: 
    - The ```Attendance.txt``` contains the record of the previous month. If not, an email would be sent to the one in charged. 
    ```C#
-   string filePath = @"C:\Path\To\Your\File.txt"; // Replace with the path to your flat file
+   string filePath = @"C:\Desktop\Thanh\Attendance.txt"; 
    string[] lines = System.IO.File.ReadAllLines(filePath);
    DateTime today = DateTime.Today;
-   bool containsCurrentMonth = false;
+   DateTime previousMonth = today.AddMonths(-1);
+   int year = previousMonth.Year;
+   int month = previousMonth.Month;
+   if (month == 1) {
+    year -= 1;  // go back to the previous year
+    month = 12; // set the month to December
+   }
+   bool containsCurrentMonth = false; 
    foreach (string line in lines)
    {
-       string[] fields = line.Split('\t'); // Replace with the delimiter used in your flat file
+       string[] fields = line.Split('\t'); 
        if (fields.Length > 2) // Make sure the line has at least 3 fields (ID, Fingerprinting ID, and Timestamp)
        {
            DateTime timestamp;
            if (DateTime.TryParse(fields[2], out timestamp))
            {
-               if (timestamp.Year == today.Year && timestamp.Month == today.Month)
+               if (timestamp.Year == year && timestamp.Month == month)
                {
                    containsCurrentMonth = true;
                    break;
@@ -138,3 +145,4 @@ The Attendance file is exported from the Punch Clock. The HR department wants to
        server.SendMail(message);
    }
    ```
+ 5. Create a Job on SQL Server Agent to run this ETL proccess at the first day of each month. 
